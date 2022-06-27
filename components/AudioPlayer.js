@@ -11,7 +11,7 @@ const AudioPlayer = () => {
   //sets the state of whether the song is playing or not.
   const [isPlaying, setIsPlaying] = useState(false)
 
-  //interacts with line 25. when the play/pause button is clicked, it will run the function which toggles the state of isPlaying.
+  //when the play/pause button is clicked, it'll run the function which toggles the state of isPlaying.
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying)
   }
@@ -19,14 +19,18 @@ const AudioPlayer = () => {
   return (
     <div className={styles.AudioPlayer}>
       <audio src=''></audio>
-      <button>
-        <AiOutlineArrowLeft />
+      <button className={styles.forwardBackward}>
+        <AiOutlineArrowLeft /> 15
       </button>
-      <button onClick={togglePlayPause}>
-        {isPlaying ? <AiOutlinePauseCircle /> : <AiOutlinePlayCircle />}
+      <button onClick={togglePlayPause} className={styles.playPause}>
+        {isPlaying ? (
+          <AiOutlinePauseCircle />
+        ) : (
+          <AiOutlinePlayCircle className={styles.play} />
+        )}
       </button>
-      <button>
-        <AiOutlineArrowRight />
+      <button className={styles.forwardBackward}>
+        <AiOutlineArrowRight /> 15
       </button>
 
       {/* current time */}
@@ -36,6 +40,9 @@ const AudioPlayer = () => {
       <div>
         <input type='range' />
       </div>
+
+      {/*duration */}
+      <div className={styles.duration}>2:49</div>
     </div>
   )
 }
