@@ -46,7 +46,6 @@
   margin-left: 25px;
 }
 
-/* progress bar for safari */
 .progressBar {
   --bar-bg: #ffe3d4;
   --seek-before-width: 100px;
@@ -63,8 +62,17 @@
   outline: none;
 }
 
-/* progress bar for firefox */
 .progressBar::-webkit-slider-runnable-track {
+  background: var(--bar-bg);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar for firefox */
+.progressBar::-moz-range-track {
   background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
@@ -90,18 +98,40 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 2;
   cursor: pointer;
 }
 
-/* time bubble while dragging - chrome and safari */
+/* progress bar - firefox */
+.progressBar::-moz-range-progress {
+  background-color: var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 11px;
+}
+
+/* knob - chrome and safari */
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -2px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knob while dragging - chrome and safari */
 .progressBar:active::-webkit-slider-thumb {
   transform: scale(1.2);
   background: var(--selectedKnobby);
 }
 
-/* time bubble - firefox */
-
+/* knob - firefox */
 .progressBar::-moz-range-thumb {
   height: 15px;
   width: 15px;
