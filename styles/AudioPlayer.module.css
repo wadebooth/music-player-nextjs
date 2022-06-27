@@ -93,3 +93,9 @@
   z-index: 0;
   cursor: pointer;
 }
+
+/* knob while dragging */
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
