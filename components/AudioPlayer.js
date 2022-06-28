@@ -64,17 +64,30 @@ const AudioPlayer = () => {
     setCurrentTime(progressBar.current.value)
   }
 
+  const backFifteenSeconds = () => {
+    progressBar.current.value = Number(progressBar.current.value - 15)
+    changeRange()
+  }
+
+  const forwardFifteenSeconds = () => {
+    progressBar.current.value = Number(progressBar.current.value + 15)
+    changeRange()
+  }
+
   return (
     <div className={styles.AudioPlayer}>
       <audio ref={audioPlayer} src='Melrose-Childish-Gambino.mp3'></audio>
-      <button className={styles.forwardBackward}>
+      <button className={styles.forwardBackward} onClick={backFifteenSeconds}>
         <AiOutlineArrowLeft /> 15
       </button>
       <button onClick={togglePlayPause} className={styles.playPause}>
         {isPlaying ? <AiOutlinePause /> : <BiPlay className={styles.play} />}
       </button>
-      <button className={styles.forwardBackward}>
-        <AiOutlineArrowRight /> 15
+      <button
+        className={styles.forwardBackward}
+        onClick={forwardFifteenSeconds}
+      >
+        15 <AiOutlineArrowRight />
       </button>
 
       {/* current time */}
