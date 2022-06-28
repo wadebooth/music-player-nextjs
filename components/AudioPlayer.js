@@ -65,6 +65,7 @@ const AudioPlayer = () => {
           className={styles.progressBar}
           defaultValue='0'
           ref={progressBar}
+          onChange={changeRange}
         />
       </div>
 
