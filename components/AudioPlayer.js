@@ -16,6 +16,7 @@ const AudioPlayer = () => {
   //REFERENCES
   const audioPlayer = useRef() //reference our audio component
   const progressBar = useRef() //reference to our progress bar
+  const animationRef = useRef() //reference the animation
 
   useEffect(() => {
     const seconds = Math.floor(audioPlayer.current.duration)
@@ -37,9 +38,30 @@ const AudioPlayer = () => {
     setIsPlaying(!prevValue)
     if (!prevValue) {
       audioPlayer.current.play()
+      animationRef.current = requestAnimationFrame(whilePlaying)
     } else {
       audioPlayer.current.pause()
+      cancelAnimationFrame(animationRef.current)
     }
+  }
+
+  const whilePlaying = () => {
+    progressBar.current.value = audioPlayer.current.currentTime
+    changePlayerCurrentTime()
+    animationRef.current = requestAnimationFrame(whilePlaying)
+  }
+
+  const changeRange = () => {
+    audioPlayer.current.currentTime = progressBar.current.value
+    changePlayerCurrentTime()
+  }
+
+  const changePlayerCurrentTime = () => {
+    progressBar.current.style.setProperty(
+      '--seek-before-width',
+      `${(progressBar.current.value / duration) * 100}%`
+    )
+    setCurrentTime(progressBar.current.value)
   }
 
   return (
