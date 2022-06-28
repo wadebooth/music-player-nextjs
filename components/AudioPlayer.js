@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from '../styles/AudioPlayer.module.css'
 import {
   AiOutlineArrowLeft,
@@ -10,9 +10,24 @@ import { BiPlay } from 'react-icons/bi'
 const AudioPlayer = () => {
   //STATE
   const [isPlaying, setIsPlaying] = useState(false)
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
 
   //REFERENCES
   const audioPlayer = useRef() //reference our audio component
+
+  useEffect(() => {
+    const seconds = Math.floor(audioPlayer.current.duration)
+    setDuration(seconds)
+  }, [AudioPlayer?.current?.loadedmetadata, AudioPlayer?.current?.readyState])
+
+  const calculateTime = (secs) => {
+    const minutes = Math.floor(secs / 60)
+    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+    const seconds = Math.floor(secs % 60)
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
+    return `${returnedMinutes}:${returnedSeconds}`
+  }
 
   //when the play/pause button is clicked, it'll run the function which toggles the state of isPlaying.
   const togglePlayPause = () => {
@@ -27,10 +42,7 @@ const AudioPlayer = () => {
 
   return (
     <div className={styles.AudioPlayer}>
-      <audio
-        ref={audioPlayer}
-        src='https://artlist.io/song/15034/thinking-of-you.mp3'
-      ></audio>
+      <audio ref={audioPlayer} src='Melrose-Childish-Gambino.mp3'></audio>
       <button className={styles.forwardBackward}>
         <AiOutlineArrowLeft /> 15
       </button>
@@ -42,15 +54,17 @@ const AudioPlayer = () => {
       </button>
 
       {/* current time */}
-      <div>0:00</div>
+      <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
 
       {/* progress bar */}
       <div>
-        <input type='range' className={styles.progressBar} />
+        <input type='range' className={styles.progressBar} defaultValue='0' />
       </div>
 
       {/*duration */}
-      <div className={styles.duration}>2:49</div>
+      <div className={styles.duration}>
+        {duration && !isNaN(duration) && calculateTime(duration)}
+      </div>
     </div>
   )
 }
