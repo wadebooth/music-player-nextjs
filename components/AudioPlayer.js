@@ -15,10 +15,12 @@ const AudioPlayer = () => {
 
   //REFERENCES
   const audioPlayer = useRef() //reference our audio component
+  const progressBar = useRef() //reference to our progress bar
 
   useEffect(() => {
     const seconds = Math.floor(audioPlayer.current.duration)
     setDuration(seconds)
+    progressBar.current.max = seconds
   }, [AudioPlayer?.current?.loadedmetadata, AudioPlayer?.current?.readyState])
 
   const calculateTime = (secs) => {
@@ -58,7 +60,12 @@ const AudioPlayer = () => {
 
       {/* progress bar */}
       <div>
-        <input type='range' className={styles.progressBar} defaultValue='0' />
+        <input
+          type='range'
+          className={styles.progressBar}
+          defaultValue='0'
+          ref={progressBar}
+        />
       </div>
 
       {/*duration */}
