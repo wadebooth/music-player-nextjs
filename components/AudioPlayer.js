@@ -8,7 +8,7 @@ import {
 import { BiPlay } from 'react-icons/bi'
 
 const AudioPlayer = () => {
-  //STATE
+  //STATES
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
