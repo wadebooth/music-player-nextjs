@@ -32,7 +32,7 @@ const AudioPlayer = () => {
     return `${returnedMinutes}:${returnedSeconds}`
   }
 
-  //when the play/pause button is clicked, it'll run the function which toggles the state of isPlaying.
+  //when the play/pause button is clicked, it'll run the function which toggles the state of isPlaying
   const togglePlayPause = () => {
     const prevValue = isPlaying
     setIsPlaying(!prevValue)
