@@ -13,7 +13,7 @@ const AudioPlayer = () => {
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
 
-  //REFERENCES
+  //REFERENCES FOR AUDIO PLAYER
   const audioPlayer = useRef() //reference our audio component
   const progressBar = useRef() //reference to our progress bar
   const animationRef = useRef() //reference the animation
